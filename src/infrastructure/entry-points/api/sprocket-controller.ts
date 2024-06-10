@@ -1,14 +1,15 @@
-import {Mapping, Get} from "@tsclean/core";
+import { Mapping, Get, Adapter } from '@tsclean/core';
+import { ISprocketService, SPROCKET_SERVICE } from '@/domain/use-cases/sprocket-service';
+import { SprocketEntity } from '@/domain/entities/sprocket';
 
-@Mapping('api/v1/sprocket')
+@Mapping('api/v1/sprockets')
 export class SprocketController {
+  constructor(
+    @Adapter(SPROCKET_SERVICE) private readonly sprocketService: ISprocketService
+  ) {}
 
-    constructor() {
-    }
-    
-    // Example function
-    @Get()
-    async getWelcome(): Promise<any> {
-        return 'Welcome to the world of clean architecture'
-    }
+  @Get()
+  async getAllSprockets(): Promise<SprocketEntity[]> {
+    return this.sprocketService.getAllSprockets();
+  }
 }
