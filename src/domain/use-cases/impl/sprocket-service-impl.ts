@@ -1,8 +1,15 @@
-import {Service} from "@tsclean/core";
-import {ISprocketService} from "@/domain/use-cases/sprocket-service";
+import { Service, Adapter } from '@tsclean/core';
+import { ISprocketService } from '@/domain/use-cases/sprocket-service';
+import { SprocketEntity } from '@/domain/entities/sprocket';
+import { ISprocketRepository, SPROCKET_REPOSITORY } from '@/domain/entities/contracts/sprocket-repository';
 
 @Service()
 export class SprocketServiceImpl implements ISprocketService {
-    constructor() {
-    }
+  constructor(
+    @Adapter(SPROCKET_REPOSITORY) private readonly sprocketRepository: ISprocketRepository
+  ) {}
+
+  async getAllSprockets(): Promise<SprocketEntity[]> {
+    return this.sprocketRepository.getAllSprockets();
+  }
 }

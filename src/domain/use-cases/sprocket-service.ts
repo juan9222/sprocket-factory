@@ -1,5 +1,7 @@
-export const SPROCKET_SERVICES = 'SPROCKET_SERVICES';
-        
-export interface ISprocketService {
+import { SprocketEntity } from '@/domain/entities/sprocket';
 
+export const SPROCKET_SERVICE = 'SPROCKET_SERVICE';
+
+export interface ISprocketService {
+  getAllSprockets(): Promise<SprocketEntity[]>;
 }
