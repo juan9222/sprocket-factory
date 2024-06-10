@@ -1,4 +1,4 @@
-import { Mapping, Get, Param, Adapter, HttpException, HttpStatus } from '@tsclean/core';
+import { Mapping, Get, Post, Body, Param, Adapter, HttpException, HttpStatus } from '@tsclean/core';
 import { ISprocketService, SPROCKET_SERVICE } from '@/domain/use-cases/sprocket-service';
 import { SprocketEntity } from '@/domain/entities/sprocket';
 import { Types } from 'mongoose';
@@ -25,5 +25,10 @@ export class SprocketController {
   @Get()
   async getAllSprockets(): Promise<SprocketEntity[]> {
     return this.sprocketService.getAllSprockets();
+  }
+
+  @Post()
+  async createSprocket(@Body() sprocket: SprocketEntity): Promise<SprocketEntity> {
+    return this.sprocketService.createSprocket(sprocket);
   }
 }

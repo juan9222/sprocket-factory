@@ -1,5 +1,6 @@
 import { ISprocketService } from '@/domain/use-cases/sprocket-service';
 import { SprocketEntity } from '@/domain/entities/sprocket';
+import { Types } from 'mongoose';
 
 export class SprocketServiceMock implements ISprocketService {
   private sprockets: SprocketEntity[] = [
@@ -27,4 +28,14 @@ export class SprocketServiceMock implements ISprocketService {
     const sprocket = this.sprockets.find(sprocket => sprocket.id === id);
     return Promise.resolve(sprocket || null);
   }
+
+  createSprocket(sprocket: SprocketEntity): Promise<SprocketEntity> {
+    const newSprocket = {
+      ...sprocket,
+      id: new Types.ObjectId().toString(),
+    };
+    this.sprockets.push(newSprocket);
+    return Promise.resolve(newSprocket);
+  }
 }
+

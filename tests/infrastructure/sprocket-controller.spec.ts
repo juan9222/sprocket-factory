@@ -1,5 +1,6 @@
 import { SprocketController } from '@/infrastructure/entry-points/api/sprocket-controller';
 import { SprocketServiceMock } from '../mocks/sprocket-service.mock';
+import { SprocketEntity } from '@/domain/entities/sprocket';
 import { Types } from 'mongoose';
 
 describe('SprocketController', () => {
@@ -31,5 +32,20 @@ describe('SprocketController', () => {
   it('should return an error if invalid ID format', async () => {
     const invalidId = 'invalidId';
     await expect(sprocketController.getSprocketById(invalidId)).rejects.toThrowError('Invalid ID format');
+  });
+
+  it('should create a new sprocket', async () => {
+    const newSprocket: SprocketEntity = {
+      id: '',
+      teeth: 15,
+      pitch_diameter: 8,
+      outside_diameter: 10,
+      pitch: 3,
+    };
+    const createdSprocket = await sprocketController.createSprocket(newSprocket);
+    expect(createdSprocket).toEqual({
+      ...newSprocket,
+      id: createdSprocket.id,
+    });
   });
 });

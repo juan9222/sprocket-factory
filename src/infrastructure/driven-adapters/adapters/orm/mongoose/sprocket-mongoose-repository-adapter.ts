@@ -15,4 +15,9 @@ export class SprocketMongooseRepositoryAdapter implements ISprocketRepository {
       id: sprocket._id.toString()
     }));
   }
+
+  async createSprocket(sprocket: SprocketEntity): Promise<SprocketEntity> {
+    const newSprocket = new SprocketModel(sprocket);
+    return newSprocket.save();
+  }
 }

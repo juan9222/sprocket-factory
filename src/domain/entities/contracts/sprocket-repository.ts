@@ -5,4 +5,5 @@ export const SPROCKET_REPOSITORY = 'SPROCKET_REPOSITORY';
 export interface ISprocketRepository {
   getSprocketById(id: string): Promise<SprocketEntity | null>;
   getAllSprockets(): Promise<SprocketEntity[]>;
+  createSprocket(sprocket: SprocketEntity): Promise<SprocketEntity>;
 }
