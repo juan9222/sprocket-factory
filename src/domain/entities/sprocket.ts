@@ -1,5 +1,10 @@
 export type SprocketEntity = {
-    // Attributes
-}
-
-export type AddSprocketParams = Omit<SprocketEntity, 'id'>
+    id?: string;
+    teeth: number;
+    pitch_diameter: number;
+    outside_diameter: number;
+    pitch: number;
+  };
+  
+  export type AddSprocketParams = Omit<SprocketEntity, 'id'>;
+  
