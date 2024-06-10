@@ -17,4 +17,9 @@ export class FactoryController {
       }
     return this.factoryService.getFactoryById(id);
   }
+
+  @Get()
+  async getAllFactories(): Promise<FactoryEntity[]> {
+    return this.factoryService.getAllFactories();
+  }
 }

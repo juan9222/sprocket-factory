@@ -21,4 +21,19 @@ export class FactoryMongooseRepositoryAdapter implements IFactoryRepository {
       }
     };
   }
+
+  async getAllFactories(): Promise<FactoryEntity[]> {
+    const factories = await FactoryModel.find().lean().exec();
+    return factories.map(factory => ({
+      ...factory,
+      id: factory._id.toString(),
+      factory: {
+        chart_data: {
+          sprocket_production_actual: factory.factory?.chart_data?.sprocket_production_actual ?? [],
+          sprocket_production_goal: factory.factory?.chart_data?.sprocket_production_goal ?? [],
+          time: factory.factory?.chart_data?.time ?? []
+        }
+      }
+    }));
+  }
 }

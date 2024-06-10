@@ -13,4 +13,8 @@ export class FactoryServiceImpl implements IFactoryService {
   async getFactoryById(id: string): Promise<FactoryEntity | null> {
     return this.factoryRepository.getFactoryById(id);
   }
+
+  async getAllFactories(): Promise<FactoryEntity[]> {
+    return this.factoryRepository.getAllFactories();
+  }
 }
