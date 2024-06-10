@@ -4,6 +4,7 @@
    "description": "Awesome project developed with Clean Architecture",
    "scripts": {
       "start": "node ./dist/index.js",
+      "seed": "ts-node src/scripts/seed.ts",
       "build": "rimraf dist && tsc -p tsconfig-build.json",
       "watch": "nodemon --exec \"npm run build && npm run start\" --watch src --ext ts"
    },
