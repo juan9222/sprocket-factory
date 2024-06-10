@@ -6,8 +6,7 @@ module.exports = {
     },
     moduleFileExtensions: ['ts', 'tsx', 'js', 'jsx', 'json', 'node'],
     testMatch: [
-      '**/__tests__/**/*.[jt]s?(x)',
-      '**/?(*.)+(spec|test).[tj]s?(x)'
+      '**/tests/**/*.spec.[jt]s?(x)'
     ],
     testPathIgnorePatterns: ['/node_modules/', '/dist/'],
     transform: {

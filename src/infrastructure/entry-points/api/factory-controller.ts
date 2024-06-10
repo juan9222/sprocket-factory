@@ -13,9 +13,13 @@ export class FactoryController {
   @Get(':id')
   async getFactoryById(@Param('id') id: string): Promise<FactoryEntity | null> {
     if (!Types.ObjectId.isValid(id)) {
-        throw new HttpException('Invalid ID format', HttpStatus.BAD_REQUEST);
-      }
-    return this.factoryService.getFactoryById(id);
+      throw new HttpException('Invalid ID format', HttpStatus.BAD_REQUEST);
+    }
+    const factory = await this.factoryService.getFactoryById(id);
+    if (!factory) {
+      throw new HttpException('Factory not found', HttpStatus.NOT_FOUND);
+    }
+    return factory;
   }
 
   @Get()
