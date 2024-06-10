@@ -12,4 +12,8 @@ export class SprocketServiceImpl implements ISprocketService {
   async getAllSprockets(): Promise<SprocketEntity[]> {
     return this.sprocketRepository.getAllSprockets();
   }
+
+  async getSprocketById(id: string): Promise<SprocketEntity | null> {
+    return this.sprocketRepository.getSprocketById(id);
+  }
 }
