@@ -1,14 +1,13 @@
-import {Mapping, Get} from "@tsclean/core";
+import { Mapping, Get, Param } from '@tsclean/core';
+import { FactoryService } from '@/domain/use-cases/factory-service';
+import { FactoryEntity } from '@/domain/entities/factory';
 
-@Mapping('api/v1/factory')
+@Mapping('api/v1/factories')
 export class FactoryController {
+  constructor(private readonly factoryService: FactoryService) {}
 
-    constructor() {
-    }
-    
-    // Example function
-    @Get()
-    async getWelcome(): Promise<any> {
-        return 'Welcome to the world of clean architecture'
-    }
+  @Get(':id')
+  async getFactoryById(@Param('id') id: string): Promise<FactoryEntity | null> {
+    return this.factoryService.getFactoryById(id);
+  }
 }
