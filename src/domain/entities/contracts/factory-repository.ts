@@ -1,5 +1,7 @@
+import { FactoryEntity } from '@/domain/entities/factory';
+
 export const FACTORY_REPOSITORY = 'FACTORY_REPOSITORY';
 
-export interface FactoryRepository {
+export interface IFactoryRepository {
   getFactoryById(id: string): Promise<FactoryEntity | null>;
 }
