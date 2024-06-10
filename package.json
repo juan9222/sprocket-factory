@@ -5,7 +5,7 @@
    "scripts": {
       "start": "node ./dist/index.js",
       "test": "jest",
-      "seed": "ts-node src/deployment/seed.ts",
+      "seed": "ts-node -r tsconfig-paths/register src/deployment/seed.ts",
       "build": "rimraf dist && tsc -p tsconfig-build.json",
       "watch": "nodemon --exec \"npm run build && npm run start\" --watch src --ext ts"
    },

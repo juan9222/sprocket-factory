@@ -1,10 +1,12 @@
 import { IFactoryRepository } from '@/domain/entities/contracts/factory-repository';
 import { FactoryEntity } from '@/domain/entities/factory';
 import { FactoryModel } from './models/factory';
+import { Types } from 'mongoose';
 
 export class FactoryMongooseRepositoryAdapter implements IFactoryRepository {
   async getFactoryById(id: string): Promise<FactoryEntity | null> {
-    const factory = await FactoryModel.findById(id).lean().exec();
+    const objectId = new Types.ObjectId(id);
+    const factory = await FactoryModel.findById(objectId).lean().exec();
     if (!factory || !factory.factory || !factory.factory.chart_data) {
       return null;
     }

@@ -34,12 +34,14 @@ services:
     build:
       context: .
       dockerfile: ./src/deployment/Dockerfile
+    volumes:
+      - ./:/app
     environment:
       - NODE_ENV=development
       - MONGO_DEVELOPMENT=mongodb://mongo:27017/sprocket-factory
     depends_on:
       - mongo
-    command: sh -c 'ts-node src/deployment/seed.ts'
+    entrypoint: ["npm", "run", "seed"]
     networks:
       - api-network
 
