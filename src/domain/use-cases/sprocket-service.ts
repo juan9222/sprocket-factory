@@ -6,4 +6,5 @@ export interface ISprocketService {
   getSprocketById(id: string): Promise<SprocketEntity | null>;
   getAllSprockets(): Promise<SprocketEntity[]>;
   createSprocket(data: SprocketEntity): Promise<SprocketEntity>;
+  updateSprocketById(id: string, sprocket: Partial<SprocketEntity>): Promise<SprocketEntity | null>;
 }

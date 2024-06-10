@@ -1,4 +1,4 @@
-import { Mapping, Get, Post, Body, Param, Adapter, HttpException, HttpStatus } from '@tsclean/core';
+import { Mapping, Get, Post, Put, Body, Param, Adapter, HttpException, HttpStatus } from '@tsclean/core';
 import { ISprocketService, SPROCKET_SERVICE } from '@/domain/use-cases/sprocket-service';
 import { SprocketEntity } from '@/domain/entities/sprocket';
 import { Types } from 'mongoose';
@@ -30,5 +30,13 @@ export class SprocketController {
   @Post()
   async createSprocket(@Body() sprocket: SprocketEntity): Promise<SprocketEntity> {
     return this.sprocketService.createSprocket(sprocket);
+  }
+
+  @Put(':id')
+  async updateSprocketById(@Param('id') id: string, @Body() sprocket: Partial<SprocketEntity>): Promise<SprocketEntity | null> {
+    if (!Types.ObjectId.isValid(id)) {
+      throw new HttpException('Invalid ID format', HttpStatus.BAD_REQUEST);
+    }
+    return this.sprocketService.updateSprocketById(id, sprocket);
   }
 }

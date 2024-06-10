@@ -48,4 +48,17 @@ describe('SprocketController', () => {
       id: createdSprocket.id,
     });
   });
+
+  it('should update a sprocket by id', async () => {
+    const validId = '666775cefbd8abda8535d245';
+    const updatedSprocket: Partial<SprocketEntity> = {
+      teeth: 15,
+      pitch_diameter: 8,
+      outside_diameter: 12,
+      pitch: 3,
+    };
+    const sprocket = await sprocketController.updateSprocketById(validId, updatedSprocket);
+    expect(sprocket).toEqual({ id: validId, ...updatedSprocket });
+  });
+
 });

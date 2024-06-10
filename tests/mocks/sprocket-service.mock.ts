@@ -37,5 +37,13 @@ export class SprocketServiceMock implements ISprocketService {
     this.sprockets.push(newSprocket);
     return Promise.resolve(newSprocket);
   }
-}
 
+  updateSprocketById(id: string, sprocket: Partial<SprocketEntity>): Promise<SprocketEntity | null> {
+    const index = this.sprockets.findIndex(s => s.id === id);
+    if (index === -1) {
+      return Promise.resolve(null);
+    }
+    this.sprockets[index] = { ...this.sprockets[index], ...sprocket };
+    return Promise.resolve(this.sprockets[index]);
+  }
+}

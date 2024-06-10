@@ -20,4 +20,9 @@ export class SprocketMongooseRepositoryAdapter implements ISprocketRepository {
     const newSprocket = new SprocketModel(sprocket);
     return newSprocket.save();
   }
+
+  async updateSprocketById(id: string, sprocket: Partial<SprocketEntity>): Promise<SprocketEntity | null> {
+    const updatedSprocket = await SprocketModel.findByIdAndUpdate(id, sprocket, { new: true }).lean().exec();
+    return updatedSprocket;
+  }
 }

@@ -20,4 +20,8 @@ export class SprocketServiceImpl implements ISprocketService {
   async createSprocket(sprocket: SprocketEntity): Promise<SprocketEntity> {
     return this.sprocketRepository.createSprocket(sprocket);
   }
+
+  async updateSprocketById(id: string, sprocket: Partial<SprocketEntity>): Promise<SprocketEntity | null> {
+    return this.sprocketRepository.updateSprocketById(id, sprocket);
+  }
 }
