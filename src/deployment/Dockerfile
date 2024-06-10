@@ -10,6 +10,9 @@ COPY package*.json ./
 # Install dependencies
 RUN npm install
 
+# Install ts-node and tsconfig-paths for running TypeScript scripts with path aliases
+RUN npm install -g ts-node tsconfig-paths
+
 # Copy the rest of the application code
 COPY . .
 
