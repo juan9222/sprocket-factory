@@ -1,5 +1,4 @@
 services:
-  # Api Service
   api:
     build:
       context: .
@@ -12,6 +11,7 @@ services:
     environment:
       - NODE_ENV=development
       - PORT=9000
+      - MONGO_DEVELOPMENT=mongodb://mongo:27017/sprocket-factory
     command: sh -c 'npm install && npm run watch'
     networks:
       - api-network
