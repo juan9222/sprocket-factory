@@ -1,10 +1,9 @@
-import {Container} from "@tsclean/core";
-import {controllers} from "@/infrastructure/entry-points/api";
-import {services, adapters} from "@/infrastructure/driven-adapters/providers";
+import { Container } from '@tsclean/core';
+import { SprocketController } from '@/infrastructure/entry-points/api/sprocket-controller';
+import { adapters, services } from '@/infrastructure/driven-adapters/providers';
 
 @Container({
-    providers: [...services, ...adapters],
-    controllers: [...controllers]
+  controllers: [SprocketController],
+  providers: [...adapters, ...services]
 })
-
 export class AppContainer {}

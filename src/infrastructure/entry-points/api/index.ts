@@ -1,1 +1,3 @@
-export const controllers = [];
+import { SprocketController } from './sprocket-controller';
+
+export const controllers = [SprocketController];
