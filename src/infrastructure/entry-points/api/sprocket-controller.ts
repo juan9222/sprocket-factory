@@ -9,7 +9,30 @@ export class SprocketController {
     @Adapter(SPROCKET_SERVICE)
     private readonly sprocketService: ISprocketService
   ) {}
-
+  /**
+   * @swagger
+   * /api/v1/sprockets/{id}:
+   *   get:
+   *     summary: Get sprocket by ID
+   *     parameters:
+   *       - in: path
+   *         name: id
+   *         required: true
+   *         schema:
+   *           type: string
+   *         description: The sprocket ID
+   *     responses:
+   *       200:
+   *         description: Success
+   *         content:
+   *           application/json:
+   *             schema:
+   *               $ref: '#/components/schemas/Sprocket'
+   *       400:
+   *         description: Invalid ID format
+   *       404:
+   *         description: Sprocket not found
+   */
   @Get(':id')
   async getSprocketById(@Param('id') id: string): Promise<SprocketEntity | null> {
     if (!Types.ObjectId.isValid(id)) {
@@ -22,16 +45,80 @@ export class SprocketController {
     return sprocket;
   }
 
+    /**
+   * @swagger
+   * /api/v1/sprockets:
+   *   get:
+   *     summary: Get all sprockets
+   *     responses:
+   *       200:
+   *         description: Success
+   *         content:
+   *           application/json:
+   *             schema:
+   *               type: array
+   *               items:
+   *                 $ref: '#/components/schemas/Sprocket'
+   */
   @Get()
   async getAllSprockets(): Promise<SprocketEntity[]> {
     return this.sprocketService.getAllSprockets();
   }
 
+  /**
+   * @swagger
+   * /api/v1/sprockets:
+   *   post:
+   *     summary: Create a new sprocket
+   *     requestBody:
+   *       required: true
+   *       content:
+   *         application/json:
+   *           schema:
+   *             $ref: '#/components/schemas/Sprocket'
+   *     responses:
+   *       201:
+   *         description: Sprocket created
+   *         content:
+   *           application/json:
+   *             schema:
+   *               $ref: '#/components/schemas/Sprocket'
+   */
   @Post()
   async createSprocket(@Body() sprocket: SprocketEntity): Promise<SprocketEntity> {
     return this.sprocketService.createSprocket(sprocket);
   }
 
+  /**
+   * @swagger
+   * /api/v1/sprockets/{id}:
+   *   put:
+   *     summary: Update a sprocket by ID
+   *     parameters:
+   *       - in: path
+   *         name: id
+   *         required: true
+   *         schema:
+   *           type: string
+   *         description: The sprocket ID
+   *     requestBody:
+   *       required: true
+   *       content:
+   *         application/json:
+   *           schema:
+   *             $ref: '#/components/schemas/Sprocket'
+   *     responses:
+   *       200:
+   *         description: Sprocket updated
+   *         content:
+   *           application/json:
+   *             schema:
+   *               $ref: '#/components/schemas/Sprocket'
+   *       400:
+   *         description: Invalid ID format
+   *       404:
+   *         description: Sprocket not found
+   */
   @Put(':id')
   async updateSprocketById(@Param('id') id: string, @Body() sprocket: Partial<SprocketEntity>): Promise<SprocketEntity | null> {
     if (!Types.ObjectId.isValid(id)) {

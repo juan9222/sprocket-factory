@@ -10,14 +10,14 @@ COPY package*.json ./
 # Install dependencies
 RUN npm install
 
-# Install ts-node and tsconfig-paths for running TypeScript scripts with path aliases
-RUN npm install -g ts-node tsconfig-paths
-
 # Copy the rest of the application code
 COPY . .
+
+# Install tsconfig-paths
+RUN npm install tsconfig-paths
 
 # Expose the port the app runs on
 EXPOSE 9000
 
 # Command to run the app
-CMD ["npm", "run", "start"]
+CMD ["npx", "ts-node", "-r", "tsconfig-paths/register", "src/index.ts"]
